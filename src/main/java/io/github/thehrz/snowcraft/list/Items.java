@@ -18,6 +18,7 @@ public class Items {
     public static final ItemStack TREE_GROWTH_ACCELERATOR_2 = new CustomItem(new ItemStack(Material.STAINED_CLAY, 1, (short) 13), "§a树木生长催化机 §7(§eII§7)", "", "§r依靠 §a有机肥料 §r运作", "", "§e中级 机器", "§8⇨ §7半径: 7x7", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §7256 J 缓存", "§8⇨ §e⚡ §764 J/s");
     public static final ItemStack TREE_GROWTH_ACCELERATOR_3 = new CustomItem(new ItemStack(Material.STAINED_CLAY, 1, (short) 13), "§a树木生长催化机 §7(§eIII§7)", "", "§r依靠 §a有机肥料 §r运作", "", "§4终极 机器", "§8⇨ §7半径: 9x9", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §7128 J 缓存", "§8⇨ §e⚡ §7512 J/s");
     public static final ItemStack TREE_GROWTH_DISPENSER = new CustomItem(new ItemStack(Material.DISPENSER), "§a树木肥料发射器", "", "§r依靠 §a有机肥料 §r运作", "§r向面对的树苗发射有机肥料", "", "§6终极机器", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §72048 J 缓存", "§8⇨ §e⚡ §7512 J/s");
+    public static final ItemStack ORIGINAL_AUTOMATED_CRAFTING_CHAMBER = new CustomItem(new ItemStack(Material.WORKBENCH), "&6原版自动合成机", "", "&6高级机器", "§8⇨ §e⚡ §732 J/物品");
     public static ItemStack MAGNESIUM_GENERATOR = null;
     public static ItemStack LANTERN = null;
     public static ItemStack ITEM_CHANGEOVER_TABLE = null;

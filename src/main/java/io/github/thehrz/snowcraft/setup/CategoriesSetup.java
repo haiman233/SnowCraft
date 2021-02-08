@@ -22,6 +22,5 @@ public class CategoriesSetup {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

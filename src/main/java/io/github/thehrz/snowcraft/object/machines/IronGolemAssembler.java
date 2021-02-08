@@ -11,6 +11,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.handlers.BlockTicker;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.machines.WitherAssembler;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.SlimefunStartup;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -30,7 +31,7 @@ import org.bukkit.material.MaterialData;
 /**
  * @author Thehrz
  */
-public class IronGolemAssembler extends SlimefunItem {
+public class IronGolemAssembler extends WitherAssembler {
     private static final int[] BORDER = new int[]{0, 2, 3, 4, 5, 6, 8, 12, 14, 21, 23, 30, 32, 39, 40, 41};
     private static final int[] BORDER_1 = new int[]{9, 10, 11, 18, 20, 27, 29, 36, 37, 38};
     private static final int[] BORDER_2 = new int[]{15, 16, 17, 24, 26, 33, 35, 42, 43, 44};
@@ -96,9 +97,9 @@ public class IronGolemAssembler extends SlimefunItem {
             public int[] getSlotsAccessedByItemTransport(BlockMenu menu, ItemTransportFlow flow, ItemStack item) {
                 if (flow.equals(ItemTransportFlow.INSERT)) {
                     if (SlimefunManager.isItemSimiliar(item, new ItemStack(Material.SOUL_SAND), true)) {
-                        return getIronBlockSlots();
+                        return IronGolemAssembler.super.getSoulSandSlots();
                     }
-                    return getIronGolemPumpkinSlots();
+                    return IronGolemAssembler.super.getWitherSkullSlots();
                 }
                 return new int[0];
             }
@@ -118,13 +119,13 @@ public class IronGolemAssembler extends SlimefunItem {
                 }
                 BlockMenu inv = BlockStorage.getInventory(b);
                 if (inv != null) {
-                    for (int slot : getIronBlockSlots()) {
+                    for (int slot : IronGolemAssembler.super.getSoulSandSlots()) {
                         if (inv.getItemInSlot(slot) != null) {
                             b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
                             inv.replaceExistingItem(slot, null);
                         }
                     }
-                    for (int slot : getIronGolemPumpkinSlots()) {
+                    for (int slot : IronGolemAssembler.super.getWitherSkullSlots()) {
                         if (inv.getItemInSlot(slot) != null) {
                             b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
                             inv.replaceExistingItem(slot, null);
@@ -135,7 +136,6 @@ public class IronGolemAssembler extends SlimefunItem {
             }
         });
     }
-
 
     private void constructMenu(BlockMenuPreset preset) {
         for (int i : BORDER) {
@@ -158,20 +158,14 @@ public class IronGolemAssembler extends SlimefunItem {
     }
 
 
+    @Override
     public String getInventoryTitle() {
         return "§5铁傀儡组装机";
     }
 
+    @Override
     public int[] getInputSlots() {
         return new int[]{19, 28, 25, 34};
-    }
-
-    public int[] getIronGolemPumpkinSlots() {
-        return new int[]{19, 28};
-    }
-
-    public int[] getIronBlockSlots() {
-        return new int[]{25, 34};
     }
 
 
@@ -191,7 +185,7 @@ public class IronGolemAssembler extends SlimefunItem {
                     int ironblock = 0;
                     int pumpkin = 0;
 
-                    for (int slot : getIronBlockSlots()) {
+                    for (int slot : IronGolemAssembler.super.getSoulSandSlots()) {
                         if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.IRON_BLOCK), true, SlimefunManager.DataType.ALWAYS)) {
                             ironblock += BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                             if (ironblock > 3) {
@@ -200,7 +194,7 @@ public class IronGolemAssembler extends SlimefunItem {
                             }
                         }
                     }
-                    for (int slot : getIronGolemPumpkinSlots()) {
+                    for (int slot : IronGolemAssembler.super.getWitherSkullSlots()) {
                         if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.PUMPKIN), true, SlimefunManager.DataType.ALWAYS)) {
                             pumpkin += BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                             if (pumpkin > 0) {
@@ -210,7 +204,7 @@ public class IronGolemAssembler extends SlimefunItem {
                         }
                     }
                     if (ironblock > 3 && pumpkin > 0) {
-                        for (int slot : getIronBlockSlots()) {
+                        for (int slot : IronGolemAssembler.super.getSoulSandSlots()) {
                             if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.IRON_BLOCK), true, SlimefunManager.DataType.ALWAYS)) {
                                 int amount = BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                                 if (amount >= ironblock) {
@@ -223,7 +217,7 @@ public class IronGolemAssembler extends SlimefunItem {
                         }
 
 
-                        for (int slot : getIronGolemPumpkinSlots()) {
+                        for (int slot : IronGolemAssembler.super.getWitherSkullSlots()) {
                             if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.PUMPKIN), true, SlimefunManager.DataType.ALWAYS)) {
                                 int amount = BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                                 if (amount >= pumpkin) {
@@ -260,6 +254,7 @@ public class IronGolemAssembler extends SlimefunItem {
         super.register(slimefun);
     }
 
+    @Override
     public int getEnergyConsumption() {
         return 2048;
     }

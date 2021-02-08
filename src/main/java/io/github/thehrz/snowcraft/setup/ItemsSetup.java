@@ -4,6 +4,7 @@ import io.github.thehrz.snowcraft.list.Items;
 import io.github.thehrz.snowcraft.object.machines.*;
 import io.izzel.taboolib.module.inject.TListener;
 import io.izzel.taboolib.module.light.TLight;
+import io.izzel.taboolib.module.nms.impl.Type;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.Slimefun.Lists.NarItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -18,7 +19,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import io.izzel.taboolib.module.nms.impl.Type;
 
 /**
  * @author Thehrz
@@ -118,6 +118,7 @@ public class ItemsSetup implements Listener {
                 return 4;
             }
         }.registerChargeableBlock(false, 512);
+        (new OriginalAutomatedCraftingChamber(CategoriesSetup.SnowCraft_Technology, Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER, "ORIGINAL_AUTOMATED_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT})).registerChargeableBlock(true, 256);
 
         Slimefun.registerResearch(new Research(3000, "§bBLOCK_COMPRES_MACHINE", 32), Items.BLOCK_COMPRES_MACHINE, Items.BLOCK_COMPRES_MACHINE_2, Items.BLOCK_COMPRES_MACHINE_3);
         Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);
@@ -126,5 +127,6 @@ public class ItemsSetup implements Listener {
         Slimefun.registerResearch(new Research(3004, "§cMAGNESIUM_GENERATOR", 32), Items.MAGNESIUM_GENERATOR);
         Slimefun.registerResearch(new Research(3005, "§bTREE_GROWTH_ACCELERATOR", 64), Items.TREE_GROWTH_ACCELERATOR, Items.TREE_GROWTH_ACCELERATOR_2, Items.TREE_GROWTH_ACCELERATOR_3);
         Slimefun.registerResearch(new Research(3006, "§bTREE_GROWTH_DISPENSER", 64), Items.TREE_GROWTH_DISPENSER);
+        Slimefun.registerResearch(new Research(3007, "§bORIGINAL_AUTOMATED_CRAFTING_CHAMBER", 32), Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER);
     }
 }

@@ -31,13 +31,13 @@ import java.util.UUID;
 public class AndroidPanel implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public static void onPlayerInteract(PlayerInteractEvent e) {
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.hasItem()) {
             if (e.getItem().equals(Items.ANDROID_PANEL)) {
                 e.setCancelled(true);
                 e.getPlayer().closeInventory();
                 if (BlockStorage.getStorage(e.getClickedBlock().getWorld()).hasInventory(e.getClickedBlock().getLocation())) {
                     if ("可编程机器人".equals(BlockStorage.getInventory(e.getClickedBlock()).toInventory().getTitle())) {
-                        if (Bukkit.getOfflinePlayer(UUID.fromString(BlockStorage.getLocationInfo(e.getClickedBlock().getLocation(),"owner"))).getUniqueId().equals(e.getPlayer().getUniqueId()) || e.getPlayer().isOp()) {
+                        if (Bukkit.getOfflinePlayer(UUID.fromString(BlockStorage.getLocationInfo(e.getClickedBlock().getLocation(), "owner"))).getUniqueId().equals(e.getPlayer().getUniqueId()) || e.getPlayer().isOp()) {
                             openMenu(e.getPlayer(), e.getClickedBlock());
                         }
                     }
