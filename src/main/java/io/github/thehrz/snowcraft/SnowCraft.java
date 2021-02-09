@@ -55,14 +55,6 @@ public final class SnowCraft extends Plugin {
             if (recipe instanceof ShapedRecipe) {
                 ShapedRecipe shapedRecipe = (ShapedRecipe) recipe;
                 Map<Character, ItemStack> ingredientMap = shapedRecipe.getIngredientMap();
-//                Iterator<String> iterator = Arrays.stream(shapedRecipe.getShape()).iterator();
-//                while (iterator.hasNext()) {
-//                    for (char c : iterator.next().toCharArray()) {
-//                        builder.append(" </slot> ");
-//                        builder.append(CustomItemSerializer.serialize(ingredientMap.get(c), CustomItemSerializer.ItemFlag.DATA, CustomItemSerializer.ItemFlag.ITEMMETA_DISPLAY_NAME, CustomItemSerializer.ItemFlag.ITEMMETA_LORE, CustomItemSerializer.ItemFlag.MATERIAL));
-//
-//                    }
-//                }
 
                 for (int i = 0; i < 3; i++) {
                     int n = 0;
