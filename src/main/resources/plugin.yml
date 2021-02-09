@@ -8,3 +8,5 @@ depend:
 lib-download: true
 lib-version: ${libVersion}
 loader-version: ${loaderVersion}
+
+build-version: ${buildVersion}
