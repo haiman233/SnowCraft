@@ -11,7 +11,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.machines.WitherAssembler;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.SlimefunStartup;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -31,7 +30,7 @@ import org.bukkit.material.MaterialData;
 /**
  * @author Thehrz
  */
-public class IronGolemAssembler extends WitherAssembler {
+public class IronGolemAssembler extends SlimefunItem {
     private static final int[] BORDER = new int[]{0, 2, 3, 4, 5, 6, 8, 12, 14, 21, 23, 30, 32, 39, 40, 41};
     private static final int[] BORDER_1 = new int[]{9, 10, 11, 18, 20, 27, 29, 36, 37, 38};
     private static final int[] BORDER_2 = new int[]{15, 16, 17, 24, 26, 33, 35, 42, 43, 44};
@@ -97,9 +96,9 @@ public class IronGolemAssembler extends WitherAssembler {
             public int[] getSlotsAccessedByItemTransport(BlockMenu menu, ItemTransportFlow flow, ItemStack item) {
                 if (flow.equals(ItemTransportFlow.INSERT)) {
                     if (SlimefunManager.isItemSimiliar(item, new ItemStack(Material.SOUL_SAND), true)) {
-                        return IronGolemAssembler.super.getSoulSandSlots();
+                        return getIronBlockSlots();
                     }
-                    return IronGolemAssembler.super.getWitherSkullSlots();
+                    return getIronGolemPumpkinSlots();
                 }
                 return new int[0];
             }
@@ -119,13 +118,13 @@ public class IronGolemAssembler extends WitherAssembler {
                 }
                 BlockMenu inv = BlockStorage.getInventory(b);
                 if (inv != null) {
-                    for (int slot : IronGolemAssembler.super.getSoulSandSlots()) {
+                    for (int slot : getIronBlockSlots()) {
                         if (inv.getItemInSlot(slot) != null) {
                             b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
                             inv.replaceExistingItem(slot, null);
                         }
                     }
-                    for (int slot : IronGolemAssembler.super.getWitherSkullSlots()) {
+                    for (int slot : getIronGolemPumpkinSlots()) {
                         if (inv.getItemInSlot(slot) != null) {
                             b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
                             inv.replaceExistingItem(slot, null);
@@ -143,49 +142,52 @@ public class IronGolemAssembler extends WitherAssembler {
         }
 
         for (int i : BORDER_1) {
-            preset.addItem(i, new CustomItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15), " "), (arg0, arg1, arg2, arg3) -> false);
-        }
-
-        for (int i : BORDER_2) {
             preset.addItem(i, new CustomItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 12), " "), (arg0, arg1, arg2, arg3) -> false);
         }
 
-        preset.addItem(1, new CustomItem(new ItemStack(Material.PUMPKIN, 1, (byte) 1), "§7南瓜槽", "", "§r这个槽位用于放置南瓜"), (arg0, arg1, arg2, arg3) -> false);
+        for (int i : BORDER_2) {
+            preset.addItem(i, new CustomItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 0), " "), (arg0, arg1, arg2, arg3) -> false);
+        }
+
+        preset.addItem(1, new CustomItem(new ItemStack(Material.PUMPKIN, 1, (short) 1), "§7南瓜槽", "", "§r这个槽位用于放置南瓜"), (arg0, arg1, arg2, arg3) -> false);
 
         preset.addItem(7, new CustomItem(new MaterialData(Material.IRON_BLOCK), "§7铁块槽", "", "§r这个槽位用于放置铁块"), (arg0, arg1, arg2, arg3) -> false);
 
         preset.addItem(13, new CustomItem(new MaterialData(Material.WATCH), "§7冷却: §b30 秒", "", "§r这个机器需要半分钟的时间来作运转准备", "§r请耐心等待!"), (arg0, arg1, arg2, arg3) -> false);
     }
 
-
-    @Override
     public String getInventoryTitle() {
         return "§5铁傀儡组装机";
     }
 
-    @Override
     public int[] getInputSlots() {
         return new int[]{19, 28, 25, 34};
     }
 
+    public int[] getIronGolemPumpkinSlots() {
+        return new int[]{19, 28};
+    }
+
+    public int[] getIronBlockSlots() {
+        return new int[]{25, 34};
+    }
 
     @Override
     public void register(boolean slimefun) {
         addItemHandler(new BlockTicker() {
-
             @Override
             public void tick(final Block b, SlimefunItem sf, Config data) {
                 if ("false".equals(BlockStorage.getLocationInfo(b.getLocation(), "enabled"))) {
                     return;
                 }
-                if (IronGolemAssembler.lifetime % 60 == 0) {
+                if (lifetime % 60 == 0) {
                     if (ChargableBlock.getCharge(b) < getEnergyConsumption()) {
                         return;
                     }
                     int ironblock = 0;
                     int pumpkin = 0;
 
-                    for (int slot : IronGolemAssembler.super.getSoulSandSlots()) {
+                    for (int slot : getIronBlockSlots()) {
                         if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.IRON_BLOCK), true, SlimefunManager.DataType.ALWAYS)) {
                             ironblock += BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                             if (ironblock > 3) {
@@ -194,7 +196,7 @@ public class IronGolemAssembler extends WitherAssembler {
                             }
                         }
                     }
-                    for (int slot : IronGolemAssembler.super.getWitherSkullSlots()) {
+                    for (int slot : getIronGolemPumpkinSlots()) {
                         if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.PUMPKIN), true, SlimefunManager.DataType.ALWAYS)) {
                             pumpkin += BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                             if (pumpkin > 0) {
@@ -204,7 +206,7 @@ public class IronGolemAssembler extends WitherAssembler {
                         }
                     }
                     if (ironblock > 3 && pumpkin > 0) {
-                        for (int slot : IronGolemAssembler.super.getSoulSandSlots()) {
+                        for (int slot : getIronBlockSlots()) {
                             if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.IRON_BLOCK), true, SlimefunManager.DataType.ALWAYS)) {
                                 int amount = BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                                 if (amount >= ironblock) {
@@ -217,7 +219,7 @@ public class IronGolemAssembler extends WitherAssembler {
                         }
 
 
-                        for (int slot : IronGolemAssembler.super.getWitherSkullSlots()) {
+                        for (int slot : getIronGolemPumpkinSlots()) {
                             if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), new ItemStack(Material.PUMPKIN), true, SlimefunManager.DataType.ALWAYS)) {
                                 int amount = BlockStorage.getInventory(b).getItemInSlot(slot).getAmount();
                                 if (amount >= pumpkin) {
@@ -254,8 +256,7 @@ public class IronGolemAssembler extends WitherAssembler {
         super.register(slimefun);
     }
 
-    @Override
     public int getEnergyConsumption() {
-        return 2048;
+        return 4096;
     }
 }

@@ -30,7 +30,7 @@ import java.util.UUID;
 @TListener
 public class AndroidPanel implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
-    public static void onPlayerInteract(PlayerInteractEvent e) {
+    public void onPlayerInteract(PlayerInteractEvent e) {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.hasItem()) {
             if (e.getItem().equals(Items.ANDROID_PANEL)) {
                 e.setCancelled(true);
@@ -47,7 +47,7 @@ public class AndroidPanel implements Listener {
     }
 
     @EventHandler
-    public static void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
         if (e.getPlayer().getInventory().getItemInMainHand().equals(Items.ANDROID_PANEL)) {
             e.setCancelled(true);
         }
