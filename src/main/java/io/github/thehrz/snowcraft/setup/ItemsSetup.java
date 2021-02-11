@@ -2,7 +2,6 @@ package io.github.thehrz.snowcraft.setup;
 
 import io.github.thehrz.snowcraft.list.Items;
 import io.github.thehrz.snowcraft.object.machines.*;
-import io.izzel.taboolib.module.inject.TListener;
 import io.izzel.taboolib.module.light.TLight;
 import io.izzel.taboolib.module.nms.impl.Type;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
@@ -17,14 +16,12 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 /**
  * @author Thehrz
  */
-@TListener
-public class ItemsSetup implements Listener {
+public class ItemsSetup {
     public static void setupItems() {
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.LANTERN, "LANTERN", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TORCH), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT)}, new CustomItem(Items.LANTERN, 6)).register(false, new SlimefunBlockHandler() {
             @Override
@@ -119,6 +116,14 @@ public class ItemsSetup implements Listener {
             }
         }.registerChargeableBlock(false, 512);
         (new OriginalAutomatedCraftingChamber(CategoriesSetup.SnowCraft_Technology, Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER, "ORIGINAL_AUTOMATED_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT})).registerChargeableBlock(true, 256);
+        (new SnowGolemAssembler(CategoriesSetup.SnowCraft_Technology, Items.SNOW_GOLEM_ASSEMBLER, "SNOW_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT})).registerChargeableBlock(true, 2048);
+        (new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_HEART, "SNOW_GOLEM_HEART", RecipeType.MOB_DROP, new ItemStack[]{null, null, null, null, new CustomItem(new ItemStack(Material.SNOW_BALL), "§4击杀由雪傀儡组装机组装的雪傀儡获得", ""), null, null, null, null})).register(true);
+        (new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_HELMET, "SNOW_GOLEM_HELMET", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, null, null, null})).register(true);
+        (new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_CHESTPLATE, "SNOW_GOLEM_CHESTPLATE", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART})).register(true);
+        (new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_LEGGINGS, "SNOW_GOLEM_LEGGINGS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART})).register(true);
+        (new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_BOOTS, "SNOW_GOLEM_BOOTS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, null, null, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART})).register(true);
+        (new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_STICK, "SNOW_GOLEM_STICK", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.MAGIC_LUMP_3, SlimefunItems.BATTERY, SlimefunItems.MAGIC_LUMP_3, new ItemStack(Material.SNOW_BLOCK), SlimefunItems.STAFF_WATER, new ItemStack(Material.SNOW_BLOCK), null, SlimefunItems.STAFF_ELEMENTAL, null})).register(false);
+
 
         Slimefun.registerResearch(new Research(3000, "§bBLOCK_COMPRES_MACHINE", 32), Items.BLOCK_COMPRES_MACHINE, Items.BLOCK_COMPRES_MACHINE_2, Items.BLOCK_COMPRES_MACHINE_3);
         Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);
@@ -128,5 +133,8 @@ public class ItemsSetup implements Listener {
         Slimefun.registerResearch(new Research(3005, "§bTREE_GROWTH_ACCELERATOR", 64), Items.TREE_GROWTH_ACCELERATOR, Items.TREE_GROWTH_ACCELERATOR_2, Items.TREE_GROWTH_ACCELERATOR_3);
         Slimefun.registerResearch(new Research(3006, "§bTREE_GROWTH_DISPENSER", 64), Items.TREE_GROWTH_DISPENSER);
         Slimefun.registerResearch(new Research(3007, "§bORIGINAL_AUTOMATED_CRAFTING_CHAMBER", 32), Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER);
+        Slimefun.registerResearch(new Research(3008, "§aSNOW_GOLEM_ASSEMBLER", 32), Items.SNOW_GOLEM_ASSEMBLER);
+        Slimefun.registerResearch(new Research(3009, "§aSNOW_GOLEM_HEART", 8), Items.SNOW_GOLEM_HEART);
+        Slimefun.registerResearch(new Research(3010, "§aSNOW_GOLEM_SUIT", 16), Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_CHESTPLATE, Items.SNOW_GOLEM_LEGGINGS, Items.SNOW_GOLEM_BOOTS);
     }
 }

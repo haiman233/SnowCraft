@@ -3,6 +3,7 @@ package io.github.thehrz.snowcraft;
 import io.github.thehrz.snowcraft.object.machines.OriginalAutomatedCraftingChamber;
 import io.github.thehrz.snowcraft.setup.ItemsSetup;
 import io.izzel.taboolib.loader.Plugin;
+import io.izzel.taboolib.metrics.BStats;
 import io.izzel.taboolib.module.config.TConfig;
 import io.izzel.taboolib.module.config.TConfigWatcher;
 import io.izzel.taboolib.module.inject.TInject;
@@ -43,6 +44,7 @@ public final class SnowCraft extends Plugin {
             OriginalAutomatedCraftingChamber.updateBlackList();
             System.out.println("加载成功");
         });
+        BStats bStats = new BStats(this.getPlugin());
         iteratorRecipes();
         ItemsSetup.setupItems();
     }

@@ -13,19 +13,21 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 taboolib {
-    tabooLibVersion = '5.54'
-    loaderVersion = '2.11'
+    tabooLibVersion = '5.55'
+    loaderVersion = '2.12'
     classifier = null
     builtin = true
 }
 
 repositories {
     mavenCentral()
+    maven { url 'https://hub.spigotmc.org/nexus/content/groups/public/' }
 }
 
 dependencies {
     compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
     compile 'org.jetbrains.kotlin:kotlin-stdlib'
+    compile 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
 }
 
 processResources {

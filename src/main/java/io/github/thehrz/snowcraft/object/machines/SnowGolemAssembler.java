@@ -37,6 +37,9 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
+/**
+ * @author Thehrz
+ */
 public class SnowGolemAssembler extends SlimefunItem {
     private static final int[] BORDER = new int[]{0, 2, 3, 4, 5, 6, 8, 12, 14, 21, 23, 30, 32, 39, 40, 41};
     private static final int[] BORDER_1 = new int[]{9, 10, 11, 18, 20, 27, 29, 36, 37, 38};
@@ -276,7 +279,7 @@ public class SnowGolemAssembler extends SlimefunItem {
 }
 
 @TListener
-class EntityDeathListener implements Listener {
+class SnowGolemAssemblerListener implements Listener {
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
         if (event.getEntity().getType().equals(EntityType.SNOWMAN)) {

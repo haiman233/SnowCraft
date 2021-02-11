@@ -99,7 +99,7 @@ public abstract class AbstractTreeGrowthAccelerator extends SlimefunItem {
     }
 
     @Override
-    public void register(boolean Slimefun) {
+    public void register(boolean slimefun) {
         this.addItemHandler(new BlockTicker() {
 
             @Override
@@ -121,7 +121,7 @@ public abstract class AbstractTreeGrowthAccelerator extends SlimefunItem {
             }
         });
 
-        super.register(Slimefun);
+        super.register(slimefun);
     }
 
     protected void tick(Block block) throws Exception {

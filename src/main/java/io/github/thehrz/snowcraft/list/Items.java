@@ -1,7 +1,9 @@
 package io.github.thehrz.snowcraft.list;
 
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomArmor;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,6 +21,13 @@ public class Items {
     public static final ItemStack TREE_GROWTH_ACCELERATOR_3 = new CustomItem(new ItemStack(Material.STAINED_CLAY, 1, (short) 13), "§a树木生长催化机 §7(§eIII§7)", "", "§r依靠 §a有机肥料 §r运作", "", "§4终极 机器", "§8⇨ §7半径: 9x9", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §7128 J 缓存", "§8⇨ §e⚡ §7512 J/s");
     public static final ItemStack TREE_GROWTH_DISPENSER = new CustomItem(new ItemStack(Material.DISPENSER), "§a树木肥料发射器", "", "§r依靠 §a有机肥料 §r运作", "§r向面对的树苗发射有机肥料", "", "§6终极机器", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §72048 J 缓存", "§8⇨ §e⚡ §7512 J/s");
     public static final ItemStack ORIGINAL_AUTOMATED_CRAFTING_CHAMBER = new CustomItem(new ItemStack(Material.WORKBENCH), "&6原版自动合成机", "", "§7可以自动合成原版物品", "", "&6高级机器", "§8⇨ §e⚡ §732 J/物品");
+    public static final ItemStack SNOW_GOLEM_ASSEMBLER = new CustomItem(new ItemStack(Material.SNOW_BLOCK), "§a雪傀儡组装器", "", "§r只有此机器组装的雪傀儡才可能掉落雪傀儡之心", "", "§4终极机器", "§8⇨ §7冷却: §b30 秒");
+    public static final ItemStack SNOW_GOLEM_HEART = new CustomItem(new ItemStack(Material.SNOW_BALL), "§6雪傀儡之心", "");
+    public static final ItemStack SNOW_GOLEM_HELMET = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_HELMET), "§r雪傀儡头盔", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
+    public static final ItemStack SNOW_GOLEM_CHESTPLATE = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_CHESTPLATE), "§r雪傀儡胸甲", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
+    public static final ItemStack SNOW_GOLEM_LEGGINGS = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_LEGGINGS), "§r雪傀儡护腿", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
+    public static final ItemStack SNOW_GOLEM_BOOTS = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_BOOTS), "§r雪傀儡靴子", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
+    public static final ItemStack SNOW_GOLEM_STICK = new CustomItem(new ItemStack(Material.STICK), "§a雪傀儡手杖", "", "§7右键掷出一个神奇雪球", "");
     public static ItemStack MAGNESIUM_GENERATOR = null;
     public static ItemStack LANTERN = null;
     public static ItemStack ITEM_CHANGEOVER_TABLE = null;
@@ -31,7 +40,7 @@ public class Items {
             MONEY_PRINTER = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2IxMzA5ZGFjNTU2OTExZTU1Mzk4MDM4YzQzNjdmODkyZDk2Y2Q1ZTgwMzRmYzIzMmRiOTIwNzM2ODc5OTQ0YyJ9fX0="), "§a印钞机", "", "§a这个机器可以帮你打印钱");
             ITEM_CHANGEOVER_TABLE = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmM0ODJlM2I1YzdkNmZiNmIwMDFkZTBlM2JiZmEwOWQyODE3YTY5OGNhYTZlMzNlYjI3NmFlYTA4MTA0NDFmNiJ9fX0="), "§a物品转换台", "", "§a这个机器可以将现有物品转换成某些特定的物品");
         } catch (Exception e) {
-            System.out.println("插件: SnowCraft 注册物品时发生错误");
+            System.out.println("插件: SnowCraft 注册物品时发送异常");
             e.printStackTrace();
         }
     }
