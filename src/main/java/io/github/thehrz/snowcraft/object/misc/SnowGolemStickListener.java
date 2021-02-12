@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static io.izzel.taboolib.module.locale.TLocale.Display.sendActionBar;
+
 /**
  * @author Thehrz
  */
@@ -54,19 +56,22 @@ public class SnowGolemStickListener implements Listener {
             if (((Projectile) event.getDamager()).getShooter() instanceof Player) {
                 if (uuids.contains(event.getDamager().getUniqueId())) {
                     int randomInt = RandomUtils.nextInt(1, 101);
+                    event.setCancelled(true);
                     if (randomInt <= 5) {
-                        event.setCancelled(true);
                         event.getEntity().setVelocity(new Vector(0, 2.25D, 0));
                         ((Damageable) event.getEntity()).damage(10D);
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您对" + event.getEntity().getName() + "造成了10点伤害并击飞了");
                     } else if (randomInt <= 8) {
-                        event.setCancelled(true);
                         event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您为" + event.getEntity().getName() + "召唤了一道闪电");
                     } else if (randomInt <= 9) {
-                        event.setCancelled(true);
                         event.getEntity().getWorld().strikeLightningEffect(event.getEntity().getLocation());
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您为" + event.getEntity().getName() + "召唤了一道没有伤害的闪电");
                     } else if (randomInt <= 29) {
-                        event.setCancelled(true);
                         ((Damageable) event.getEntity()).damage(20D);
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您对" + event.getEntity().getName() + "造成了20点伤害");
+                    } else {
+                        event.setCancelled(false);
                     }
                 }
             }

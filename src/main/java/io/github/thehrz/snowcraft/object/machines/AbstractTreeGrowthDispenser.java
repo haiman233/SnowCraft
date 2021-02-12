@@ -19,13 +19,8 @@ import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import net.minecraft.server.v1_12_R1.BlockPosition;
-import net.minecraft.server.v1_12_R1.ItemDye;
-import net.minecraft.server.v1_12_R1.World;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_12_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Directional;
@@ -164,10 +159,7 @@ public abstract class AbstractTreeGrowthDispenser extends SlimefunItem {
             if (SlimefunManager.isItemSimiliar(blockMenu.getItemInSlot(slot), SlimefunItems.FERTILIZER, false)) {
                 ChargableBlock.addCharge(machine, -getEnergyConsumption());
                 block.getState().setData(sapling);
-                Class<?> aClass = Class.forName("net.minecraft.server.v1_12_R1.ItemDye");
-                ItemDye itemDye = (ItemDye) aClass.getDeclaredConstructor().newInstance();
-                aClass.getDeclaredMethod("a", net.minecraft.server.v1_12_R1.ItemStack.class, World.class, BlockPosition.class)
-                        .invoke(itemDye, new net.minecraft.server.v1_12_R1.ItemStack(CraftMagicNumbers.getBlock(block)), ((CraftWorld) block.getWorld()).getHandle(), new BlockPosition(block.getX(), block.getY(), block.getZ()));
+                AbstractTreeGrowthAccelerator.growSapling(block);
                 blockMenu.replaceExistingItem(slot, InvUtils.decreaseItem(blockMenu.getItemInSlot(slot), 1));
                 ParticleEffect.VILLAGER_HAPPY.display(block.getLocation().add(0.5D, 0.5D, 0.5D), 0.1F, 0.1F, 0.1F, 0.0F, 4);
                 break;

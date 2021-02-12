@@ -31,6 +31,7 @@ public abstract class AbstractBlockCompresMachine extends AContainer {
     @Override
     public void registerDefaultRecipes() {
         this.registerRecipe(5, new ItemStack[]{new ItemStack(Material.GRAVEL)}, new ItemStack[]{new ItemStack(Material.NETHERRACK, 2)});
+        this.registerRecipe(3, new ItemStack[]{new ItemStack(Material.PACKED_ICE)}, new ItemStack[]{new ItemStack(Material.SNOW_BLOCK)});
     }
 
     @Override

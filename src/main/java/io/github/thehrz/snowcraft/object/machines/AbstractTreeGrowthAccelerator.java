@@ -139,20 +139,23 @@ public abstract class AbstractTreeGrowthAccelerator extends SlimefunItem {
         }
     }
 
+    public static void growSapling(Block block) throws ClassNotFoundException, InstantiationException, IllegalAccessException, java.lang.reflect.InvocationTargetException, NoSuchMethodException {
+        Class<?> aClass = Class.forName("net.minecraft.server.v1_12_R1.ItemDye");
+        ItemDye itemDye = (ItemDye) aClass.getDeclaredConstructor().newInstance();
+        aClass.getDeclaredMethod("a", net.minecraft.server.v1_12_R1.ItemStack.class, World.class, BlockPosition.class)
+                .invoke(itemDye, new net.minecraft.server.v1_12_R1.ItemStack(CraftMagicNumbers.getBlock(block)), ((CraftWorld) block.getWorld()).getHandle(), new BlockPosition(block.getX(), block.getY(), block.getZ()));
+    }
+
     private void grow(Block machine, Block block, BlockMenu blockMenu, Sapling sapling) throws Exception {
         for (int slot : getInputSlots()) {
             if (SlimefunManager.isItemSimiliar(blockMenu.getItemInSlot(slot), SlimefunItems.FERTILIZER, false)) {
                 ChargableBlock.addCharge(machine, -getEnergyConsumption());
                 block.getState().setData(sapling);
-                Class<?> aClass = Class.forName("net.minecraft.server.v1_12_R1.ItemDye");
-                ItemDye itemDye = (ItemDye) aClass.getDeclaredConstructor().newInstance();
-                aClass.getDeclaredMethod("a", net.minecraft.server.v1_12_R1.ItemStack.class, World.class, BlockPosition.class)
-                        .invoke(itemDye, new net.minecraft.server.v1_12_R1.ItemStack(CraftMagicNumbers.getBlock(block)), ((CraftWorld) block.getWorld()).getHandle(), new BlockPosition(block.getX(), block.getY(), block.getZ()));
+                growSapling(block);
                 blockMenu.replaceExistingItem(slot, InvUtils.decreaseItem(blockMenu.getItemInSlot(slot), 1));
                 ParticleEffect.VILLAGER_HAPPY.display(block.getLocation().add(0.5D, 0.5D, 0.5D), 0.1F, 0.1F, 0.1F, 0.0F, 4);
                 break;
             }
         }
     }
-
 }

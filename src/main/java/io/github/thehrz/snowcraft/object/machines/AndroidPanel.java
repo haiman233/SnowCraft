@@ -29,32 +29,6 @@ import java.util.UUID;
  */
 @TListener
 public class AndroidPanel implements Listener {
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerInteract(PlayerInteractEvent e) {
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.hasItem()) {
-            if (e.getItem().equals(Items.ANDROID_PANEL)) {
-                e.setCancelled(true);
-                e.getPlayer().closeInventory();
-                if (BlockStorage.getStorage(e.getClickedBlock().getWorld()).hasInventory(e.getClickedBlock().getLocation())) {
-                    if ("可编程机器人".equals(BlockStorage.getInventory(e.getClickedBlock()).toInventory().getTitle())) {
-                        if (Bukkit.getOfflinePlayer(UUID.fromString(BlockStorage.getLocationInfo(e.getClickedBlock().getLocation(), "owner"))).getUniqueId().equals(e.getPlayer().getUniqueId()) || e.getPlayer().isOp()) {
-                            openMenu(e.getPlayer(), e.getClickedBlock());
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
-        if (e.getPlayer().getInventory().getItemInMainHand().equals(Items.ANDROID_PANEL)) {
-            e.setCancelled(true);
-        }
-
-    }
-
-
     public static void openMenu(Player player, Block block) {
         ChestMenu menu = new ChestMenu("§b机器人面板");
         menu.setEmptySlotsClickable(false);
@@ -105,5 +79,27 @@ public class AndroidPanel implements Listener {
         }
         player.closeInventory();
         playlists.open(player);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onPlayerInteract(PlayerInteractEvent e) {
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.hasItem() && e.getItem().equals(Items.ANDROID_PANEL)) {
+            e.setCancelled(true);
+            e.getPlayer().closeInventory();
+            if (BlockStorage.getStorage(e.getClickedBlock().getWorld()).hasInventory(e.getClickedBlock().getLocation())) {
+                if ("可编程机器人".equals(BlockStorage.getInventory(e.getClickedBlock()).toInventory().getTitle())) {
+                    if (Bukkit.getOfflinePlayer(UUID.fromString(BlockStorage.getLocationInfo(e.getClickedBlock().getLocation(), "owner"))).getUniqueId().equals(e.getPlayer().getUniqueId()) || e.getPlayer().isOp()) {
+                        openMenu(e.getPlayer(), e.getClickedBlock());
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+        if (e.getPlayer().getInventory().getItemInMainHand().equals(Items.ANDROID_PANEL)) {
+            e.setCancelled(true);
+        }
     }
 }

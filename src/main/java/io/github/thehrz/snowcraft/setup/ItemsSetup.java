@@ -2,20 +2,14 @@ package io.github.thehrz.snowcraft.setup;
 
 import io.github.thehrz.snowcraft.list.Items;
 import io.github.thehrz.snowcraft.object.machines.*;
-import io.izzel.taboolib.module.light.TLight;
-import io.izzel.taboolib.module.nms.impl.Type;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.Slimefun.Lists.NarItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -23,18 +17,18 @@ import org.bukkit.inventory.ItemStack;
  */
 public class ItemsSetup {
     public static void setupItems() {
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.LANTERN, "LANTERN", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TORCH), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT)}, new CustomItem(Items.LANTERN, 6)).register(false, new SlimefunBlockHandler() {
-            @Override
-            public void onPlace(Player player, Block block, SlimefunItem slimefunItem) {
-                TLight.create(block, Type.BLOCK, 15);
-            }
-
-            @Override
-            public boolean onBreak(Player player, Block block, SlimefunItem slimefunItem, UnregisterReason unregisterReason) {
-                TLight.delete(block.getLocation(), Type.BLOCK);
-                return true;
-            }
-        });
+//        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.LANTERN, "LANTERN", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TORCH), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT)}, new CustomItem(Items.LANTERN, 6)).register(false, new SlimefunBlockHandler() {
+//            @Override
+//            public void onPlace(Player player, Block block, SlimefunItem slimefunItem) {
+//                TLight.create(block, Type.BLOCK, 15);
+//            }
+//
+//            @Override
+//            public boolean onBreak(Player player, Block block, SlimefunItem slimefunItem, UnregisterReason unregisterReason) {
+//                TLight.delete(block.getLocation(), Type.BLOCK);
+//                return true;
+//            }
+//        });
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ANDROID_PANEL, "ANDROID_PANEL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, new ItemStack(Material.THIN_GLASS), new ItemStack(Material.REDSTONE), SlimefunItems.PLASTIC_SHEET, NarItems.UU, new ItemStack(Material.THIN_GLASS), null, SlimefunItems.PLASTIC_SHEET, null}).register(false);
         new IronGolemAssembler(CategoriesSetup.SnowCraft_Technology, Items.IRON_GOLEM_ASSEMBLER, "IRON_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.GILDED_IRON, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.GILDED_IRON}).registerChargeableBlock(false, 4096);
         new MagnesiumGenerator(CategoriesSetup.SnowCraft_Technology, Items.MAGNESIUM_GENERATOR, "MAGNESIUM_GENERATOR", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.HEATING_COIL, null, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.COAL_GENERATOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.COMBUSTION_REACTOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.COMBUSTION_REACTOR}).registerUnrechargeableBlock(false, 256);
@@ -126,7 +120,7 @@ public class ItemsSetup {
 
 
         Slimefun.registerResearch(new Research(3000, "§bBLOCK_COMPRES_MACHINE", 32), Items.BLOCK_COMPRES_MACHINE, Items.BLOCK_COMPRES_MACHINE_2, Items.BLOCK_COMPRES_MACHINE_3);
-        Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);
+//        Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);
         Slimefun.registerResearch(new Research(3002, "§bANDROID_PANEL", 128), Items.ANDROID_PANEL);
         Slimefun.registerResearch(new Research(3003, "§aIRON_GOLEM_PROGRAM", 16), Items.IRON_GOLEM_ASSEMBLER);
         Slimefun.registerResearch(new Research(3004, "§cMAGNESIUM_GENERATOR", 32), Items.MAGNESIUM_GENERATOR);
