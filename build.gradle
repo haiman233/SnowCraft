@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'io.github.thehrz.snowcraft'
-version = '1.0.0'
+version = System.getenv("APPVEYOR_BUILD_VERSION")
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'

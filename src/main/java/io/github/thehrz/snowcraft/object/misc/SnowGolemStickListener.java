@@ -59,17 +59,17 @@ public class SnowGolemStickListener implements Listener {
                     event.setCancelled(true);
                     if (randomInt <= 5) {
                         event.getEntity().setVelocity(new Vector(0, 2.25D, 0));
-                        ((Damageable) event.getEntity()).damage(10D);
-                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您对" + event.getEntity().getName() + "造成了10点伤害并击飞了");
+                        ((Damageable) event.getEntity()).damage(10D, ((Player) ((Projectile) event.getDamager()).getShooter()));
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()), "§a您对" + event.getEntity().getName() + "造成了10点伤害并击飞了");
                     } else if (randomInt <= 8) {
                         event.getEntity().getWorld().strikeLightning(event.getEntity().getLocation());
-                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您为" + event.getEntity().getName() + "召唤了一道闪电");
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()), "§a您为" + event.getEntity().getName() + "召唤了一道闪电");
                     } else if (randomInt <= 9) {
                         event.getEntity().getWorld().strikeLightningEffect(event.getEntity().getLocation());
-                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您为" + event.getEntity().getName() + "召唤了一道没有伤害的闪电");
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()), "§a您为" + event.getEntity().getName() + "召唤了一道没有伤害的闪电");
                     } else if (randomInt <= 29) {
                         ((Damageable) event.getEntity()).damage(20D);
-                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()).getPlayer(), "§a您对" + event.getEntity().getName() + "造成了20点伤害");
+                        sendActionBar(((Player) ((Projectile) event.getDamager()).getShooter()), "§a您对" + event.getEntity().getName() + "造成了20点伤害");
                     } else {
                         event.setCancelled(false);
                     }

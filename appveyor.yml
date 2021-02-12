@@ -1,3 +1,5 @@
 version: 1.0.{build}
 build_script:
-- cmd: gradlew clean build -Dfile.encoding=UTF-8
+  - cmd: gradlew clean build -Dfile.encoding=UTF-8
+artifacts:
+  - path: \build\libs\SnowCraft-$(appveyor_build_version).jar
