@@ -6,5 +6,5 @@
 
 ![SnowCraft.png](https://attachment.mcbbs.net/forum/202102/06/163758jafdb8iae18f1a8b.png)
 
-
+您可以在[Appveyor](https://ci.appveyor.com/project/Thehrz/snowcraft/build/artifacts)上下载我们的构建文件
 
