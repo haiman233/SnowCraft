@@ -24,7 +24,7 @@ public class SnowGolemSuit implements Listener {
                 SlimefunManager.isItemSimiliar(event.getPlayer().getInventory().getBoots(), Items.SNOW_GOLEM_BOOTS, true) &&
                 event.getPlayer().getLocation().getBlock().getType() == Material.SNOW ||
                 event.getPlayer().getLocation().getBlock().getType() == Material.SNOW_BLOCK) {
-            event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1));
+            event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 2));
         }
     }
 }

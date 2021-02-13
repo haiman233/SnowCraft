@@ -21,7 +21,7 @@ public class Items {
     public static final ItemStack TREE_GROWTH_ACCELERATOR_3 = new CustomItem(new ItemStack(Material.STAINED_CLAY, 1, (short) 13), "§a树木生长催化机 §7(§eIII§7)", "", "§r依靠 §a有机肥料 §r运作", "", "§4终极 机器", "§8⇨ §7半径: 9x9", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §7128 J 缓存", "§8⇨ §e⚡ §7512 J/s");
     public static final ItemStack TREE_GROWTH_DISPENSER = new CustomItem(new ItemStack(Material.DISPENSER), "§a树木肥料发射器", "", "§r依靠 §a有机肥料 §r运作", "§r向面对的树苗发射有机肥料", "", "§6终极机器", "§8⇨ §7速度: §a1/次", "§8⇨ §e⚡ §72048 J 缓存", "§8⇨ §e⚡ §7512 J/s");
     public static final ItemStack ORIGINAL_AUTOMATED_CRAFTING_CHAMBER = new CustomItem(new ItemStack(Material.WORKBENCH), "&6原版自动合成机", "", "§7可以自动合成原版物品", "", "&6高级机器", "§8⇨ §e⚡ §732 J/物品");
-    public static final ItemStack SNOW_GOLEM_ASSEMBLER = new CustomItem(new ItemStack(Material.SNOW_BLOCK), "§a雪傀儡组装器", "", "§r只有此机器组装的雪傀儡才可能掉落雪傀儡之心", "", "§4终极机器", "§8⇨ §7冷却: §b30 秒");
+    public static final ItemStack SNOW_GOLEM_ASSEMBLER = new CustomItem(new ItemStack(Material.SNOW_BLOCK), "§a雪傀儡组装机", "", "§r只有此机器组装的雪傀儡才可能掉落雪傀儡之心", "", "§4终极机器", "§8⇨ §7冷却: §b30 秒");
     public static final ItemStack SNOW_GOLEM_HEART = new CustomItem(new ItemStack(Material.SNOW_BALL), "§6雪傀儡之心", "");
     public static final ItemStack SNOW_GOLEM_HELMET = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_HELMET), "§r雪傀儡头盔", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
     public static final ItemStack SNOW_GOLEM_CHESTPLATE = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_CHESTPLATE), "§r雪傀儡胸甲", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
