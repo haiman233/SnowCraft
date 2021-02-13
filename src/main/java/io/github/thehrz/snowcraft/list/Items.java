@@ -28,6 +28,7 @@ public class Items {
     public static final ItemStack SNOW_GOLEM_LEGGINGS = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_LEGGINGS), "§r雪傀儡护腿", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
     public static final ItemStack SNOW_GOLEM_BOOTS = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_BOOTS), "§r雪傀儡靴子", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
     public static final ItemStack SNOW_GOLEM_STICK = new CustomItem(new ItemStack(Material.STICK), "§a雪傀儡手杖", "", "§7右键掷出一个神奇雪球", "");
+    public static final ItemStack ICE_CREAM = new CustomItem(new ItemStack(Material.FLOWER_POT_ITEM), "§a冰淇淋", "", "§7这不是花盆吗?", "");
     public static ItemStack MAGNESIUM_GENERATOR = null;
     public static ItemStack LANTERN = null;
     public static ItemStack ITEM_CHANGEOVER_TABLE = null;
@@ -40,7 +41,7 @@ public class Items {
             MONEY_PRINTER = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2IxMzA5ZGFjNTU2OTExZTU1Mzk4MDM4YzQzNjdmODkyZDk2Y2Q1ZTgwMzRmYzIzMmRiOTIwNzM2ODc5OTQ0YyJ9fX0="), "§a印钞机", "", "§a这个机器可以帮你打印钱");
             ITEM_CHANGEOVER_TABLE = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmM0ODJlM2I1YzdkNmZiNmIwMDFkZTBlM2JiZmEwOWQyODE3YTY5OGNhYTZlMzNlYjI3NmFlYTA4MTA0NDFmNiJ9fX0="), "§a物品转换台", "", "§a这个机器可以将现有物品转换成某些特定的物品");
         } catch (Exception e) {
-            System.out.println("插件: SnowCraft 注册物品时发送异常");
+            System.out.println("插件: SnowCraft 注册物品时发生异常");
             e.printStackTrace();
         }
     }

@@ -2,15 +2,22 @@ package io.github.thehrz.snowcraft.setup;
 
 import io.github.thehrz.snowcraft.list.Items;
 import io.github.thehrz.snowcraft.object.machines.*;
+import me.mrCookieSlime.CSCoreLibPlugin.events.ItemUseEvent;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.Slimefun.Lists.NarItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.handlers.ItemInteractionHandler;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+import static io.izzel.taboolib.module.locale.TLocale.Display.sendActionBar;
 
 /**
  * @author Thehrz
@@ -111,6 +118,17 @@ public class ItemsSetup {
         new OriginalAutomatedCraftingChamber(CategoriesSetup.SnowCraft_Technology, Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER, "ORIGINAL_AUTOMATED_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT}).registerChargeableBlock(true, 256);
         new IronGolemAssembler(CategoriesSetup.SnowCraft_Technology, Items.IRON_GOLEM_ASSEMBLER, "IRON_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.GILDED_IRON, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.GILDED_IRON}).registerChargeableBlock(false, 4096);
         new SnowGolemAssembler(CategoriesSetup.SnowCraft_Technology, Items.SNOW_GOLEM_ASSEMBLER, "SNOW_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT}).registerChargeableBlock(true, 2048);
+        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ICE_CREAM, "SNOWCRAFT_ICE_CREAM", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{}).register(false, new ItemInteractionHandler() {
+            @Override
+            public boolean onRightClick(ItemUseEvent itemUseEvent, Player player, ItemStack itemStack) {
+                if (new CustomItem(itemStack, 1).equals(new CustomItem(Items.ICE_CREAM, 1))) {
+                    itemUseEvent.setCancelled(true);
+                    sendActionBar(player, "§a你食用了冰淇淋 获得了冰淇淋给予你的跳跃加成");
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 15, 2));
+                }
+                return true;
+            }
+        });
 
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ANDROID_PANEL, "ANDROID_PANEL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, new ItemStack(Material.THIN_GLASS), new ItemStack(Material.REDSTONE), SlimefunItems.PLASTIC_SHEET, NarItems.UU, new ItemStack(Material.THIN_GLASS), null, SlimefunItems.PLASTIC_SHEET, null}).register(false);
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_HEART, "SNOW_GOLEM_HEART", RecipeType.MOB_DROP, new ItemStack[]{null, null, null, null, new CustomItem(new ItemStack(Material.SNOW_BALL), "§4击杀由雪傀儡组装机组装的雪傀儡获得", ""), null, null, null, null}).register(true);
@@ -119,7 +137,6 @@ public class ItemsSetup {
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_LEGGINGS, "SNOW_GOLEM_LEGGINGS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_BOOTS, "SNOW_GOLEM_BOOTS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, null, null, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_STICK, "SNOW_GOLEM_STICK", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.MAGIC_LUMP_3, SlimefunItems.BATTERY, SlimefunItems.MAGIC_LUMP_3, new ItemStack(Material.SNOW_BLOCK), SlimefunItems.STAFF_WATER, new ItemStack(Material.SNOW_BLOCK), null, SlimefunItems.STAFF_ELEMENTAL, null}).register(false);
-
 
         Slimefun.registerResearch(new Research(3000, "§bBLOCK_COMPRES_MACHINE", 32), Items.BLOCK_COMPRES_MACHINE, Items.BLOCK_COMPRES_MACHINE_2, Items.BLOCK_COMPRES_MACHINE_3);
 //        Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);
@@ -131,6 +148,7 @@ public class ItemsSetup {
         Slimefun.registerResearch(new Research(3007, "§bORIGINAL_AUTOMATED_CRAFTING_CHAMBER", 32), Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER);
         Slimefun.registerResearch(new Research(3008, "§aSNOW_GOLEM_ASSEMBLER", 32), Items.SNOW_GOLEM_ASSEMBLER);
         Slimefun.registerResearch(new Research(3009, "§aSNOW_GOLEM_HEART", 8), Items.SNOW_GOLEM_HEART);
-        Slimefun.registerResearch(new Research(3010, "§aSNOW_GOLEM_SUIT", 16), Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_CHESTPLATE, Items.SNOW_GOLEM_LEGGINGS, Items.SNOW_GOLEM_BOOTS);
+        Slimefun.registerResearch(new Research(3010, "§aSNOW_GOLEM_SUIT", 16), Items.SNOW_GOLEM_HELMET, Items.SNOW_GOLEM_CHESTPLATE, Items.SNOW_GOLEM_LEGGINGS, Items.SNOW_GOLEM_BOOTS);
+        Slimefun.registerResearch(new Research(3011, "§aSNOW_GOLEM_STICK", 16), Items.SNOW_GOLEM_STICK);
     }
 }

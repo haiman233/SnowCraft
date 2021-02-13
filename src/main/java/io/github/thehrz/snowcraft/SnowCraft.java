@@ -5,7 +5,6 @@ import io.github.thehrz.snowcraft.setup.ItemsSetup;
 import io.izzel.taboolib.loader.Plugin;
 import io.izzel.taboolib.metrics.BStats;
 import io.izzel.taboolib.module.config.TConfig;
-import io.izzel.taboolib.module.config.TConfigWatcher;
 import io.izzel.taboolib.module.inject.TInject;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItemSerializer;
 import org.bukkit.Bukkit;
@@ -17,12 +16,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.Map;
 
+import static io.izzel.taboolib.module.locale.chatcolor.TColor.translate;
+
 /**
  * @author Thehrz
  */
 public final class SnowCraft extends Plugin {
-    @NotNull
-    private static final TConfigWatcher WATCHER = new TConfigWatcher();
+    private static String prefix;
 
     @TInject("config.yml")
     public static TConfig conf;
@@ -30,6 +30,15 @@ public final class SnowCraft extends Plugin {
     @NotNull
     public static TConfig getConf() {
         return conf;
+    }
+
+    @NotNull
+    public static String getPrefix() {
+        return translate(prefix);
+    }
+
+    public static void setPrefix(String prefix) {
+        SnowCraft.prefix = prefix;
     }
 
     @Override
@@ -42,9 +51,11 @@ public final class SnowCraft extends Plugin {
         OriginalAutomatedCraftingChamber.updateBlackList();
         conf.listener(() -> {
             OriginalAutomatedCraftingChamber.updateBlackList();
-            System.out.println("加载成功");
+            setPrefix(getConf().getString("Prefix"));
+            System.out.println(getPrefix() + " §a配置文件加载成功");
         });
-        BStats bStats = new BStats(this.getPlugin());
+        setPrefix(getConf().getString("Prefix"));
+        new BStats(this.getPlugin());
         iteratorRecipes();
         ItemsSetup.setupItems();
     }
@@ -57,14 +68,12 @@ public final class SnowCraft extends Plugin {
             if (recipe instanceof ShapedRecipe) {
                 ShapedRecipe shapedRecipe = (ShapedRecipe) recipe;
                 Map<Character, ItemStack> ingredientMap = shapedRecipe.getIngredientMap();
-
                 for (int i = 0; i < 3; i++) {
                     int n = 0;
                     String row = " ";
                     if (shapedRecipe.getShape().length == 3 || i < shapedRecipe.getShape().length) {
                         row = shapedRecipe.getShape()[i];
                     }
-
                     StringBuilder stringBuilderRow = new StringBuilder();
                     for (int j = 0; j < 3; j++) {
                         ItemStack item = null;
