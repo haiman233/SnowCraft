@@ -1,4 +1,4 @@
-Prefix: "SnowCraft"
+Prefix: "&8[&aSnowCraft&8]"
 OriginalAutomatedCraftingChamber:
   # 禁止原版自动物品合成机合成的物品
   # 允许填写的物品种类: http://docs.zoyn.top/bukkitapi/1.12.2/org/bukkit/Material.html
