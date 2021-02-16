@@ -25,7 +25,7 @@ repositories {
 dependencies {
     compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
     compile 'org.jetbrains.kotlin:kotlin-stdlib'
-    compile 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
+    compile 'ink.ptms.core:v11200:11200:all'
 }
 
 processResources {
