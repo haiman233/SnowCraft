@@ -17,8 +17,8 @@ public class IceCream implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (SlimefunManager.isItemSimiliar(event.getItem(), Items.ICE_CREAM, true)) {
             event.setCancelled(true);
-            int amount = event.getPlayer().getInventory().getItemInMainHand().getAmount();
-            event.getPlayer().getInventory().getItemInMainHand().setAmount(--amount);
+            int amount = event.getItem().getAmount();
+            event.getItem().setAmount(--amount);
             sendActionBar(event.getPlayer(), "§a你食用了冰淇淋 获得了冰淇淋给予你的跳跃加成");
             event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 3600, 5));
         }
