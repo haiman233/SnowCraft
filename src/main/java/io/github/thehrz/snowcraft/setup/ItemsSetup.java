@@ -1,5 +1,6 @@
 package io.github.thehrz.snowcraft.setup;
 
+import io.github.thehrz.snowcraft.list.Categories;
 import io.github.thehrz.snowcraft.list.Items;
 import io.github.thehrz.snowcraft.object.machines.*;
 import io.izzel.taboolib.module.light.TLight;
@@ -12,6 +13,8 @@ import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AGenerator;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -23,8 +26,28 @@ import org.bukkit.inventory.ItemStack;
  */
 public class ItemsSetup {
     public static void setupItems() {
-        new MagnesiumGenerator(CategoriesSetup.SnowCraft_Technology, Items.MAGNESIUM_GENERATOR, "MAGNESIUM_GENERATOR", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.HEATING_COIL, null, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.COAL_GENERATOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.COMBUSTION_REACTOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.COMBUSTION_REACTOR}).registerUnrechargeableBlock(false, 256);
-        new AbstractTreeGrowthAccelerator(CategoriesSetup.SnowCraft_Technology, Items.TREE_GROWTH_ACCELERATOR, "TREE_GROWTH_ACCELERATOR", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.FERTILIZER2, new ItemStack(Material.WATER_BUCKET), SlimefunItems.FERTILIZER2, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.PROGRAMMABLE_ANDROID_WOODCUTTER, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.DURALUMIN_INGOT, SlimefunItems.FOOD_COMPOSTER, SlimefunItems.DURALUMIN_INGOT}) {
+        new AGenerator(Categories.SnowCraft_Technology, Items.MAGNESIUM_GENERATOR, "MAGNESIUM_GENERATOR", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.HEATING_COIL, null, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.COAL_GENERATOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.COMBUSTION_REACTOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.COMBUSTION_REACTOR}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§c镁发电机";
+            }
+
+            @Override
+            public ItemStack getProgressBar() {
+                return new ItemStack(Material.FLINT_AND_STEEL);
+            }
+
+            @Override
+            public void registerDefaultRecipes() {
+                this.registerFuel(new MachineFuel(32, SlimefunItems.MAGNESIUM_DUST));
+            }
+
+            @Override
+            public int getEnergyProduction() {
+                return 64;
+            }
+        }.registerUnrechargeableBlock(false, 256);
+        new AbstractTreeGrowthAccelerator(Categories.SnowCraft_Technology, Items.TREE_GROWTH_ACCELERATOR, "TREE_GROWTH_ACCELERATOR", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.FERTILIZER2, new ItemStack(Material.WATER_BUCKET), SlimefunItems.FERTILIZER2, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.PROGRAMMABLE_ANDROID_WOODCUTTER, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.DURALUMIN_INGOT, SlimefunItems.FOOD_COMPOSTER, SlimefunItems.DURALUMIN_INGOT}) {
             @Override
             public int getEnergyConsumption() {
                 return 32;
@@ -35,7 +58,7 @@ public class ItemsSetup {
                 return 3;
             }
         }.registerChargeableBlock(false, 128);
-        new AbstractTreeGrowthAccelerator(CategoriesSetup.SnowCraft_Technology, Items.TREE_GROWTH_ACCELERATOR_2, "TREE_GROWTH_ACCELERATOR_2", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.FERTILIZER2, new ItemStack(Material.WATER_BUCKET), SlimefunItems.FERTILIZER2, SlimefunItems.ELECTRIC_MOTOR, Items.TREE_GROWTH_ACCELERATOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.ELECTRO_MAGNET, SlimefunItems.DAMASCUS_STEEL_INGOT}) {
+        new AbstractTreeGrowthAccelerator(Categories.SnowCraft_Technology, Items.TREE_GROWTH_ACCELERATOR_2, "TREE_GROWTH_ACCELERATOR_2", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.FERTILIZER2, new ItemStack(Material.WATER_BUCKET), SlimefunItems.FERTILIZER2, SlimefunItems.ELECTRIC_MOTOR, Items.TREE_GROWTH_ACCELERATOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.ELECTRO_MAGNET, SlimefunItems.DAMASCUS_STEEL_INGOT}) {
             @Override
             public int getEnergyConsumption() {
                 return 64;
@@ -46,7 +69,7 @@ public class ItemsSetup {
                 return 7;
             }
         }.registerChargeableBlock(false, 256);
-        new AbstractTreeGrowthAccelerator(CategoriesSetup.SnowCraft_Technology, Items.TREE_GROWTH_ACCELERATOR_3, "TREE_GROWTH_ACCELERATOR_3", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.FERTILIZER2, new ItemStack(Material.WATER_BUCKET), SlimefunItems.FERTILIZER2, SlimefunItems.ELECTRIC_MOTOR, Items.TREE_GROWTH_ACCELERATOR_2, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_ALLOY_INGOT}) {
+        new AbstractTreeGrowthAccelerator(Categories.SnowCraft_Technology, Items.TREE_GROWTH_ACCELERATOR_3, "TREE_GROWTH_ACCELERATOR_3", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.FERTILIZER2, new ItemStack(Material.WATER_BUCKET), SlimefunItems.FERTILIZER2, SlimefunItems.ELECTRIC_MOTOR, Items.TREE_GROWTH_ACCELERATOR_2, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.REINFORCED_ALLOY_INGOT}) {
             @Override
             public int getEnergyConsumption() {
                 return 128;
@@ -57,7 +80,7 @@ public class ItemsSetup {
                 return 9;
             }
         }.registerChargeableBlock(false, 512);
-        new AbstractTreeGrowthDispenser(CategoriesSetup.SnowCraft_Technology, Items.TREE_GROWTH_DISPENSER, "TREE_GROWTH_DISPENSER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.CARBONADO, SlimefunItems.POWER_CRYSTAL, SlimefunItems.CARBONADO, SlimefunItems.ELECTRO_MAGNET, Items.TREE_GROWTH_ACCELERATOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.ELECTRO_MAGNET, SlimefunItems.BLISTERING_INGOT_3}) {
+        new AbstractTreeGrowthDispenser(Categories.SnowCraft_Technology, Items.TREE_GROWTH_DISPENSER, "TREE_GROWTH_DISPENSER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.CARBONADO, SlimefunItems.POWER_CRYSTAL, SlimefunItems.CARBONADO, SlimefunItems.ELECTRO_MAGNET, Items.TREE_GROWTH_ACCELERATOR, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.ELECTRO_MAGNET, SlimefunItems.BLISTERING_INGOT_3}) {
             @Override
             public ItemStack getProgressBar() {
                 return new ItemStack(Material.SAPLING);
@@ -68,7 +91,7 @@ public class ItemsSetup {
                 return 512;
             }
         }.registerChargeableBlock(false, 2048);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.LANTERN, "LANTERN", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TORCH), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT)}, new CustomItem(Items.LANTERN, 6)).register(false, new SlimefunBlockHandler() {
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.LANTERN, "LANTERN", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.TORCH), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT)}, new CustomItem(Items.LANTERN, 6)).register(false, new SlimefunBlockHandler() {
             @Override
             public void onPlace(Player player, Block block, SlimefunItem slimefunItem) {
                 TLight.create(block.getLocation(), Type.BLOCK, 15);
@@ -81,7 +104,7 @@ public class ItemsSetup {
             }
         });
 
-        new AbstractBlockCompresMachine(CategoriesSetup.SnowCraft_Technology, Items.BLOCK_COMPRES_MACHINE, "BLOCK_COMPRES_MACHINE", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.PISTON_BASE), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.ALUMINUM_BRASS_INGOT, SlimefunItems.HARDENED_METAL_INGOT, SlimefunItems.ALUMINUM_BRASS_INGOT, null, new ItemStack(Material.OBSIDIAN), null}) {
+        new AbstractBlockCompresMachine(Categories.SnowCraft_Technology, Items.BLOCK_COMPRES_MACHINE, "BLOCK_COMPRES_MACHINE", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.PISTON_BASE), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.ALUMINUM_BRASS_INGOT, SlimefunItems.HARDENED_METAL_INGOT, SlimefunItems.ALUMINUM_BRASS_INGOT, null, new ItemStack(Material.OBSIDIAN), null}) {
             @Override
             public int getEnergyConsumption() {
                 return 8;
@@ -92,7 +115,7 @@ public class ItemsSetup {
                 return 1;
             }
         }.registerChargeableBlock(false, 32);
-        new AbstractBlockCompresMachine(CategoriesSetup.SnowCraft_Technology, Items.BLOCK_COMPRES_MACHINE_2, "BLOCK_COMPRES_MACHINE_2", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ELECTRIC_MOTOR, Items.BLOCK_COMPRES_MACHINE, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REDSTONE_ALLOY, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.REDSTONE_ALLOY, null, new ItemStack(Material.OBSIDIAN), null}) {
+        new AbstractBlockCompresMachine(Categories.SnowCraft_Technology, Items.BLOCK_COMPRES_MACHINE_2, "BLOCK_COMPRES_MACHINE_2", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ELECTRIC_MOTOR, Items.BLOCK_COMPRES_MACHINE, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REDSTONE_ALLOY, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.REDSTONE_ALLOY, null, new ItemStack(Material.OBSIDIAN), null}) {
             @Override
             public int getEnergyConsumption() {
                 return 32;
@@ -103,7 +126,7 @@ public class ItemsSetup {
                 return 2;
             }
         }.registerChargeableBlock(false, 256);
-        new AbstractBlockCompresMachine(CategoriesSetup.SnowCraft_Technology, Items.BLOCK_COMPRES_MACHINE_3, "BLOCK_COMPRES_MACHINE_3", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ELECTRIC_MOTOR, Items.BLOCK_COMPRES_MACHINE_2, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.CARBONADO_EDGED_CAPACITOR, SlimefunItems.BLISTERING_INGOT_3, null, new ItemStack(Material.OBSIDIAN), null}) {
+        new AbstractBlockCompresMachine(Categories.SnowCraft_Technology, Items.BLOCK_COMPRES_MACHINE_3, "BLOCK_COMPRES_MACHINE_3", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ELECTRIC_MOTOR, Items.BLOCK_COMPRES_MACHINE_2, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.CARBONADO_EDGED_CAPACITOR, SlimefunItems.BLISTERING_INGOT_3, null, new ItemStack(Material.OBSIDIAN), null}) {
             @Override
             public int getEnergyConsumption() {
                 return 64;
@@ -114,18 +137,18 @@ public class ItemsSetup {
                 return 4;
             }
         }.registerChargeableBlock(false, 512);
-        new OriginalAutomatedCraftingChamber(CategoriesSetup.SnowCraft_Technology, Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER, "ORIGINAL_AUTOMATED_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT}).registerChargeableBlock(true, 256);
-        new IronGolemAssembler(CategoriesSetup.SnowCraft_Technology, Items.IRON_GOLEM_ASSEMBLER, "IRON_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.GILDED_IRON, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.GILDED_IRON}).registerChargeableBlock(false, 4096);
-        new SnowGolemAssembler(CategoriesSetup.SnowCraft_Technology, Items.SNOW_GOLEM_ASSEMBLER, "SNOW_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT}).registerChargeableBlock(true, 2048);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ICE_CREAM, "SNOWCRAFT_ICE_CREAM", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{}).register(false);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ANDROID_PANEL, "ANDROID_PANEL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, new ItemStack(Material.THIN_GLASS), new ItemStack(Material.REDSTONE), SlimefunItems.PLASTIC_SHEET, NarItems.UU, new ItemStack(Material.THIN_GLASS), null, SlimefunItems.PLASTIC_SHEET, null}).register(false);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_HEART, "SNOW_GOLEM_HEART", RecipeType.MOB_DROP, new ItemStack[]{null, null, null, null, new CustomItem(new ItemStack(Material.SNOW_BALL), "§4击杀由雪傀儡组装机组装的雪傀儡获得", ""), null, null, null, null}).register(true);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_HELMET, "SNOW_GOLEM_HELMET", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, null, null, null}).register(true);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_CHESTPLATE, "SNOW_GOLEM_CHESTPLATE", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART}).register(true);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_LEGGINGS, "SNOW_GOLEM_LEGGINGS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_BOOTS, "SNOW_GOLEM_BOOTS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, null, null, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_STICK, "SNOW_GOLEM_STICK", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.MAGIC_LUMP_3, SlimefunItems.BATTERY, SlimefunItems.MAGIC_LUMP_3, new ItemStack(Material.SNOW_BLOCK), SlimefunItems.STAFF_WATER, new ItemStack(Material.SNOW_BLOCK), null, SlimefunItems.STAFF_ELEMENTAL, null}).register(false);
-        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.LOG_BARREL, "LOG_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD_STEP, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD_STEP, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0)}) {
+        new OriginalAutomatedCraftingChamber(Categories.SnowCraft_Technology, Items.ORIGINAL_AUTOMATED_CRAFTING_CHAMBER, "ORIGINAL_AUTOMATED_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT}).registerChargeableBlock(true, 256);
+        new IronGolemAssembler(Categories.SnowCraft_Technology, Items.IRON_GOLEM_ASSEMBLER, "IRON_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.HARDENED_GLASS, SlimefunItems.GILDED_IRON, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.GILDED_IRON}).registerChargeableBlock(false, 4096);
+        new SnowGolemAssembler(Categories.SnowCraft_Technology, Items.SNOW_GOLEM_ASSEMBLER, "SNOW_GOLEM_ASSEMBLER", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, SlimefunItems.POWER_CRYSTAL, null, SlimefunItems.ELECTRIC_MOTOR, new ItemStack(Material.WORKBENCH), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.CARGO_MOTOR, SlimefunItems.REINFORCED_ALLOY_INGOT}).registerChargeableBlock(true, 2048);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.ICE_CREAM, "SNOWCRAFT_ICE_CREAM", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{}).register(false);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.ANDROID_PANEL, "ANDROID_PANEL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, new ItemStack(Material.THIN_GLASS), new ItemStack(Material.REDSTONE), SlimefunItems.PLASTIC_SHEET, NarItems.UU, new ItemStack(Material.THIN_GLASS), null, SlimefunItems.PLASTIC_SHEET, null}).register(false);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.SNOW_GOLEM_HEART, "SNOW_GOLEM_HEART", RecipeType.MOB_DROP, new ItemStack[]{null, null, null, null, new CustomItem(new ItemStack(Material.SNOW_BALL), "§4击杀由雪傀儡组装机组装的雪傀儡获得", ""), null, null, null, null}).register(true);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.SNOW_GOLEM_HELMET, "SNOW_GOLEM_HELMET", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, null, null, null}).register(true);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.SNOW_GOLEM_CHESTPLATE, "SNOW_GOLEM_CHESTPLATE", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART}).register(true);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.SNOW_GOLEM_LEGGINGS, "SNOW_GOLEM_LEGGINGS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.SNOW_GOLEM_BOOTS, "SNOW_GOLEM_BOOTS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, null, null, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.SNOW_GOLEM_STICK, "SNOW_GOLEM_STICK", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.MAGIC_LUMP_3, SlimefunItems.BATTERY, SlimefunItems.MAGIC_LUMP_3, new ItemStack(Material.SNOW_BLOCK), SlimefunItems.STAFF_WATER, new ItemStack(Material.SNOW_BLOCK), null, SlimefunItems.STAFF_ELEMENTAL, null}).register(false);
+        new AbstractBarrel(Categories.SnowCraft_Technology, Items.LOG_BARREL, "LOG_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD_STEP, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD_STEP, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0)}) {
             @Override
             public String getInventoryTitle() {
                 return "§d木桶";
@@ -133,11 +156,11 @@ public class ItemsSetup {
 
             @Override
             public int getBarrelCapacity() {
-                return 10 * 64;
+                return 512 * 64;
             }
         }.register(false);
 
-        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.IRON_BARREL, "IRON_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_BLOCK), SlimefunItems.POWER_CRYSTAL, Items.LOG_BARREL, SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_BLOCK)}) {
+        new AbstractBarrel(Categories.SnowCraft_Technology, Items.IRON_BARREL, "IRON_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_BLOCK), SlimefunItems.POWER_CRYSTAL, Items.LOG_BARREL, SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_BLOCK)}) {
             @Override
             public String getInventoryTitle() {
                 return "§8铁桶";
@@ -149,7 +172,7 @@ public class ItemsSetup {
             }
         }.register(false);
 
-        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.ALUMINUM_BARREL, "ALUMINUM_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.ALUMINUM_PLATE, SlimefunItems.ALUMINUM_INGOT, Items.ALUMINUM_PLATE, SlimefunItems.POWER_CRYSTAL, Items.IRON_BARREL, SlimefunItems.POWER_CRYSTAL, Items.ALUMINUM_PLATE, SlimefunItems.ALUMINUM_INGOT, Items.ALUMINUM_PLATE}) {
+        new AbstractBarrel(Categories.SnowCraft_Technology, Items.ALUMINUM_BARREL, "ALUMINUM_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.ALUMINUM_PLATE, SlimefunItems.ALUMINUM_INGOT, Items.ALUMINUM_PLATE, SlimefunItems.POWER_CRYSTAL, Items.IRON_BARREL, SlimefunItems.POWER_CRYSTAL, Items.ALUMINUM_PLATE, SlimefunItems.ALUMINUM_INGOT, Items.ALUMINUM_PLATE}) {
             @Override
             public String getInventoryTitle() {
                 return "§c铝桶";
@@ -161,7 +184,7 @@ public class ItemsSetup {
             }
         }.register(false);
 
-        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.GOLD_BARREL, "GOLD_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.GOLD_24K, SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.POWER_CRYSTAL, Items.ALUMINUM_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.GOLD_24K, SlimefunItems.GOLD_24K_BLOCK}) {
+        new AbstractBarrel(Categories.SnowCraft_Technology, Items.GOLD_BARREL, "GOLD_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.GOLD_24K, SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.POWER_CRYSTAL, Items.ALUMINUM_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.GOLD_24K, SlimefunItems.GOLD_24K_BLOCK}) {
             @Override
             public String getInventoryTitle() {
                 return "§6金桶";
@@ -173,7 +196,7 @@ public class ItemsSetup {
             }
         }.register(false);
 
-        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.ALLOY_BARREL, "ALLOY_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_PLATE, SlimefunItems.POWER_CRYSTAL, Items.GOLD_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_PLATE}) {
+        new AbstractBarrel(Categories.SnowCraft_Technology, Items.ALLOY_BARREL, "ALLOY_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_PLATE, SlimefunItems.POWER_CRYSTAL, Items.GOLD_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_PLATE}) {
             @Override
             public String getInventoryTitle() {
                 return "§e强化合金桶";
@@ -185,7 +208,7 @@ public class ItemsSetup {
             }
         }.register(false);
 
-        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.CARBONADO_BARREL, "CARBONADO_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO, SlimefunItems.POWER_CRYSTAL, Items.ALLOY_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO}) {
+        new AbstractBarrel(Categories.SnowCraft_Technology, Items.CARBONADO_BARREL, "CARBONADO_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO, SlimefunItems.POWER_CRYSTAL, Items.ALLOY_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO}) {
             @Override
             public String getInventoryTitle() {
                 return "§0黑钻桶";
@@ -197,7 +220,7 @@ public class ItemsSetup {
             }
         }.register(false);
 
-        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ALUMINUM_PLATE, "ALUMINUM_PLATE", RecipeType.COMPRESSOR, new ItemStack[]{new CustomItem(SlimefunItems.ALUMINUM_INGOT, 8), null, null, null, null, null, null, null, null}).register(false);
+        new SlimefunItem(Categories.SnowCraft_Misc, Items.ALUMINUM_PLATE, "ALUMINUM_PLATE", RecipeType.COMPRESSOR, new ItemStack[]{new CustomItem(SlimefunItems.ALUMINUM_INGOT, 8), null, null, null, null, null, null, null, null}).register(false);
 
         Slimefun.registerResearch(new Research(3000, "§bBLOCK_COMPRES_MACHINE", 32), Items.BLOCK_COMPRES_MACHINE, Items.BLOCK_COMPRES_MACHINE_2, Items.BLOCK_COMPRES_MACHINE_3);
         Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);

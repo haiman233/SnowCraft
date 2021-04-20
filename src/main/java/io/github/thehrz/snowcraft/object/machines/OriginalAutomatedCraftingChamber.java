@@ -1,6 +1,5 @@
 package io.github.thehrz.snowcraft.object.machines;
 
-import io.github.thehrz.snowcraft.SnowCraft;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.InvUtils;
@@ -13,17 +12,17 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.material.MaterialData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Thehrz
@@ -35,23 +34,22 @@ public class OriginalAutomatedCraftingChamber extends AutomatedCraftingChamber {
 
     private static final int[] BORDER_OUT = new int[]{23, 24, 25, 26, 32, 35, 41, 42, 43, 44};
 
-    public static Map<String, ItemStack> recipes = new HashMap<>();
-    public static List<ItemStack> blacklist = new ArrayList<>();
+    private static final Map<String, ItemStack> RECIPES = new HashMap<>();
+    private static final List<ItemStack> BLACKLIST = new ArrayList<>();
 
     public OriginalAutomatedCraftingChamber(Category category, ItemStack item, String name, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, name, recipeType, recipe);
+        iteratorRecipes();
     }
 
-    public static void updateBlackList() {
-        blacklist.clear();
-        SnowCraft.getConf().get("OriginalAutomatedCraftingChamber.blacklist");
-        for (String blacklist : SnowCraft.getConf().getStringList("OriginalAutomatedCraftingChamber.blacklist")) {
+    public static void updateBlackList(List<String> list) {
+        BLACKLIST.clear();
+        for (String blacklist : list) {
             if (Material.getMaterial(blacklist) != null) {
-                OriginalAutomatedCraftingChamber.blacklist.add(new ItemStack(Material.getMaterial(blacklist)));
+                OriginalAutomatedCraftingChamber.BLACKLIST.add(new ItemStack(Material.getMaterial(blacklist)));
             }
         }
     }
-
 
     @Override
     protected void constructMenu(BlockMenuPreset preset) {
@@ -113,9 +111,9 @@ public class OriginalAutomatedCraftingChamber extends AutomatedCraftingChamber {
         }
 
         String input = builder.toString();
-        if (OriginalAutomatedCraftingChamber.recipes.containsKey(input)) {
-            final ItemStack output = OriginalAutomatedCraftingChamber.recipes.get(input).clone();
-            if (!blacklist.contains(output)) {
+        if (OriginalAutomatedCraftingChamber.RECIPES.containsKey(input)) {
+            final ItemStack output = OriginalAutomatedCraftingChamber.RECIPES.get(input).clone();
+            if (!BLACKLIST.contains(output)) {
                 if (this.fits(b, new ItemStack[]{output})) {
                     this.pushItems(b, new ItemStack[]{output});
                     ChargableBlock.addCharge(b, -this.getEnergyConsumption());
@@ -125,6 +123,41 @@ public class OriginalAutomatedCraftingChamber extends AutomatedCraftingChamber {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void iteratorRecipes() {
+        Iterator<Recipe> recipeIterator = Bukkit.getServer().recipeIterator();
+        while (recipeIterator.hasNext()) {
+            StringBuilder builder = new StringBuilder();
+            Recipe recipe = recipeIterator.next();
+            if (recipe instanceof ShapedRecipe) {
+                ShapedRecipe shapedRecipe = (ShapedRecipe) recipe;
+                Map<Character, ItemStack> ingredientMap = shapedRecipe.getIngredientMap();
+                for (int i = 0; i < 3; i++) {
+                    int n = 0;
+                    String row = " ";
+                    if (shapedRecipe.getShape().length == 3 || i < shapedRecipe.getShape().length) {
+                        row = shapedRecipe.getShape()[i];
+                    }
+                    StringBuilder stringBuilderRow = new StringBuilder();
+                    for (int j = 0; j < 3; j++) {
+                        ItemStack item = null;
+                        if (row.length() == 3 || j < row.length()) {
+                            item = ingredientMap.get(row.charAt(j));
+                        }
+                        if (item == null) {
+                            n++;
+                        }
+                        stringBuilderRow.append(" </slot> ");
+                        stringBuilderRow.append(CustomItemSerializer.serialize(item, CustomItemSerializer.ItemFlag.DATA, CustomItemSerializer.ItemFlag.ITEMMETA_DISPLAY_NAME, CustomItemSerializer.ItemFlag.ITEMMETA_LORE, CustomItemSerializer.ItemFlag.MATERIAL));
+                    }
+                    if (n != 3) {
+                        builder.append(stringBuilderRow);
+                    }
+                }
+                RECIPES.put(builder.toString(), shapedRecipe.getResult());
             }
         }
     }

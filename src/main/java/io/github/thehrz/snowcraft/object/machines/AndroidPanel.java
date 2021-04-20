@@ -86,12 +86,11 @@ public class AndroidPanel implements Listener {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.hasItem() && (new CustomItem(event.getItem(), 1)).equals(new CustomItem(Items.ANDROID_PANEL, 1))) {
             event.setCancelled(true);
             event.getPlayer().closeInventory();
-            if (BlockStorage.getStorage(event.getClickedBlock().getWorld()).hasInventory(event.getClickedBlock().getLocation())) {
-                if ("可编程机器人".equals(BlockStorage.getInventory(event.getClickedBlock()).toInventory().getTitle())) {
-                    if (Bukkit.getOfflinePlayer(UUID.fromString(BlockStorage.getLocationInfo(event.getClickedBlock().getLocation(), "owner"))).getUniqueId().equals(event.getPlayer().getUniqueId()) || event.getPlayer().isOp()) {
-                        openMenu(event.getPlayer(), event.getClickedBlock());
-                    }
-                }
+            if (BlockStorage.getStorage(event.getClickedBlock().getWorld()).hasInventory(event.getClickedBlock().getLocation()) &&
+                    "可编程机器人".equals(BlockStorage.getInventory(event.getClickedBlock()).toInventory().getTitle()) &&
+                    Bukkit.getOfflinePlayer(UUID.fromString(BlockStorage.getLocationInfo(event.getClickedBlock().getLocation(), "owner"))).getUniqueId().equals(event.getPlayer().getUniqueId()) ||
+                    event.getPlayer().isOp()) {
+                openMenu(event.getPlayer(), event.getClickedBlock());
             }
         }
     }
