@@ -29,6 +29,13 @@ public class Items {
     public static final ItemStack SNOW_GOLEM_BOOTS = new CustomArmor(new CustomItem(new ItemStack(Material.LEATHER_BOOTS), "§r雪傀儡靴子", "", "§7使用整套装备后即可使用雪傀儡手杖", ""), Color.WHITE);
     public static final ItemStack SNOW_GOLEM_STICK = new CustomItem(new ItemStack(Material.STICK), "§a雪傀儡手杖", "", "§7右键掷出一个神奇雪球", "");
     public static final ItemStack ICE_CREAM = new CustomItem(new ItemStack(Material.FLOWER_POT_ITEM), "§a冰淇淋", "", "§7这不是花盆吗?", "");
+    public static final ItemStack LOG_BARREL = new CustomItem(new ItemStack(Material.LOG, 1, (short) 0), "§d木桶", "", "§e储存容量: §7512 组", "");
+    public static final ItemStack IRON_BARREL = new CustomItem(new ItemStack(Material.STAINED_GLASS, 1, (short) 8), "§8铁桶", "", "§e储存容量: §72048 组", "");
+    public static final ItemStack ALUMINUM_BARREL = new CustomItem(new ItemStack(Material.IRON_BLOCK), "§c铝桶", "", "§e储存容量: §74096 组", "");
+    public static final ItemStack GOLD_BARREL = new CustomItem(new ItemStack(Material.GOLD_BLOCK), "§6金桶", "", "§e储存容量: §78192 组", "");
+    public static final ItemStack ALLOY_BARREL = new CustomItem(new ItemStack(Material.STAINED_GLASS, 1, (short) 0), "§e强化合金桶", "", "§a储存容量: §b16384 组", "");
+    public static final ItemStack CARBONADO_BARREL = new CustomItem(new ItemStack(Material.OBSIDIAN), "§0黑钻桶", "", "§a储存容量: §b65536 组", "");
+    public static final ItemStack ALUMINUM_PLATE = new CustomItem(new ItemStack(Material.PAPER), "§7铝板");
     public static ItemStack MAGNESIUM_GENERATOR = null;
     public static ItemStack LANTERN = null;
     public static ItemStack ITEM_CHANGEOVER_TABLE = null;

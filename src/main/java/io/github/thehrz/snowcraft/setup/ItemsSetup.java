@@ -125,6 +125,79 @@ public class ItemsSetup {
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_LEGGINGS, "SNOW_GOLEM_LEGGINGS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_BOOTS, "SNOW_GOLEM_BOOTS", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{null, null, null, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART, Items.SNOW_GOLEM_HEART, null, Items.SNOW_GOLEM_HEART}).register(true);
         new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.SNOW_GOLEM_STICK, "SNOW_GOLEM_STICK", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.MAGIC_LUMP_3, SlimefunItems.BATTERY, SlimefunItems.MAGIC_LUMP_3, new ItemStack(Material.SNOW_BLOCK), SlimefunItems.STAFF_WATER, new ItemStack(Material.SNOW_BLOCK), null, SlimefunItems.STAFF_ELEMENTAL, null}).register(false);
+        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.LOG_BARREL, "LOG_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD_STEP, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0), new ItemStack(Material.WOOD_STEP, 1, (short) 0), new ItemStack(Material.WOOD, 1, (short) 0)}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§d木桶";
+            }
+
+            @Override
+            public int getBarrelCapacity() {
+                return 10 * 64;
+            }
+        }.register(false);
+
+        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.IRON_BARREL, "IRON_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_BLOCK), SlimefunItems.POWER_CRYSTAL, Items.LOG_BARREL, SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_BLOCK)}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§8铁桶";
+            }
+
+            @Override
+            public int getBarrelCapacity() {
+                return 2048 * 64;
+            }
+        }.register(false);
+
+        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.ALUMINUM_BARREL, "ALUMINUM_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{Items.ALUMINUM_PLATE, SlimefunItems.ALUMINUM_INGOT, Items.ALUMINUM_PLATE, SlimefunItems.POWER_CRYSTAL, Items.IRON_BARREL, SlimefunItems.POWER_CRYSTAL, Items.ALUMINUM_PLATE, SlimefunItems.ALUMINUM_INGOT, Items.ALUMINUM_PLATE}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§c铝桶";
+            }
+
+            @Override
+            public int getBarrelCapacity() {
+                return 4092 * 64;
+            }
+        }.register(false);
+
+        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.GOLD_BARREL, "GOLD_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.GOLD_24K, SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.POWER_CRYSTAL, Items.ALUMINUM_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.GOLD_24K_BLOCK, SlimefunItems.GOLD_24K, SlimefunItems.GOLD_24K_BLOCK}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§6金桶";
+            }
+
+            @Override
+            public int getBarrelCapacity() {
+                return 8192 * 64;
+            }
+        }.register(false);
+
+        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.ALLOY_BARREL, "ALLOY_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_PLATE, SlimefunItems.POWER_CRYSTAL, Items.GOLD_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_PLATE}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§e强化合金桶";
+            }
+
+            @Override
+            public int getBarrelCapacity() {
+                return 16384 * 64;
+            }
+        }.register(false);
+
+        new AbstractBarrel(CategoriesSetup.SnowCraft_Technology, Items.CARBONADO_BARREL, "CARBONADO_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO, SlimefunItems.POWER_CRYSTAL, Items.ALLOY_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO}) {
+            @Override
+            public String getInventoryTitle() {
+                return "§0黑钻桶";
+            }
+
+            @Override
+            public int getBarrelCapacity() {
+                return 65536 * 64;
+            }
+        }.register(false);
+
+        new SlimefunItem(CategoriesSetup.SnowCraft_Misc, Items.ALUMINUM_PLATE, "ALUMINUM_PLATE", RecipeType.COMPRESSOR, new ItemStack[]{new CustomItem(SlimefunItems.ALUMINUM_INGOT, 8), null, null, null, null, null, null, null, null}).register(false);
 
         Slimefun.registerResearch(new Research(3000, "§bBLOCK_COMPRES_MACHINE", 32), Items.BLOCK_COMPRES_MACHINE, Items.BLOCK_COMPRES_MACHINE_2, Items.BLOCK_COMPRES_MACHINE_3);
         Slimefun.registerResearch(new Research(3001, "§bLANTERN", 16), Items.LANTERN);
@@ -139,5 +212,7 @@ public class ItemsSetup {
         Slimefun.registerResearch(new Research(3010, "§aSNOW_GOLEM_SUIT", 16), Items.SNOW_GOLEM_HELMET, Items.SNOW_GOLEM_CHESTPLATE, Items.SNOW_GOLEM_LEGGINGS, Items.SNOW_GOLEM_BOOTS);
         Slimefun.registerResearch(new Research(3011, "§aSNOW_GOLEM_STICK", 16), Items.SNOW_GOLEM_STICK);
         Slimefun.registerResearch(new Research(3012, "§aSNOWCRAFT_ICE_CREAM", 4), Items.ICE_CREAM);
+        Slimefun.registerResearch(new Research(3013, "§aBARREL", 64), Items.LOG_BARREL, Items.IRON_BARREL, Items.ALUMINUM_BARREL, Items.GOLD_BARREL, Items.ALLOY_BARREL, Items.CARBONADO_BARREL);
+        Slimefun.registerResearch(new Research(3014, "§aALUMINUM_PLATE", 4), Items.ALUMINUM_PLATE);
     }
 }
