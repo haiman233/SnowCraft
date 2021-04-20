@@ -1,4 +1,4 @@
-package io.github.thehrz.snowcraft.setup;
+package io.github.thehrz.snowcraft.list;
 
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
  * @author Thehrz
  */
 
-public class CategoriesSetup {
+public class Categories {
 
     public static Category SnowCraft_Technology = null;
     public static Category SnowCraft_Misc = null;
