@@ -211,7 +211,7 @@ public class ItemsSetup {
         new AbstractBarrel(Categories.SnowCraft_Technology, Items.CARBONADO_BARREL, "CARBONADO_BARREL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO, SlimefunItems.POWER_CRYSTAL, Items.ALLOY_BARREL, SlimefunItems.POWER_CRYSTAL, SlimefunItems.CARBONADO, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.CARBONADO}) {
             @Override
             public String getInventoryTitle() {
-                return "§0黑钻桶";
+                return "§1黑钻桶";
             }
 
             @Override

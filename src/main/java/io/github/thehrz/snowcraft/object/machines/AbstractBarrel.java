@@ -72,10 +72,25 @@ public abstract class AbstractBarrel extends SlimefunItem {
 
             @Override
             public boolean onBreak(Player player, Block block, SlimefunItem slimefunItem, UnregisterReason unregisterReason) {
-                if ("0".equals(BlockStorage.getLocationInfo(block.getLocation(), "amount"))) {
+                int amount = Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount"));
+
+                for (int slot : getInputSlots()) {
+                    if (BlockStorage.getInventory(block).getItemInSlot(slot) != null) {
+                        amount += BlockStorage.getInventory(block).getItemInSlot(slot).getAmount();
+                    }
+                }
+
+                for (int slot : getOutputSlots()) {
+                    if (BlockStorage.getInventory(block).getItemInSlot(slot) != null) {
+                        amount += BlockStorage.getInventory(block).getItemInSlot(slot).getAmount();
+                    }
+                }
+
+                if (amount == 0) {
                     return true;
                 } else {
-                    new MenuBuilder(SnowCraft.getInstance().getPlugin()).title("§4确认破坏此方块?").rows(3).buildAsync(inventory -> inventory.setItem(13, new ItemBuilder(Material.REDSTONE).name("§4确认?").lore("", "§7该方块内还有 §4" + BlockStorage.getLocationInfo(block.getLocation(), "amount") + " §7个 §b" + Items.getName(Items.fromJson(BlockStorage.getLocationInfo(block.getLocation(), "item-type"))), "", "§7点击清空方块内物品并破坏方块").build())).event(clickEvent -> {
+                    int finalAmount = amount;
+                    new MenuBuilder(SnowCraft.getInstance().getPlugin()).title("§4确认破坏此方块?").rows(3).buildAsync(inventory -> inventory.setItem(13, new ItemBuilder(Material.REDSTONE).name("§4确认?").lore("", "§7该方块内还有 §4" + finalAmount + " §7个 §b" + Items.getName(Items.fromJson(BlockStorage.getLocationInfo(block.getLocation(), "item-type"))), "", "§7点击清空方块内物品并破坏方块").build())).event(clickEvent -> {
                         if (clickEvent.getRawSlot() == 13) {
                             block.getWorld().dropItemNaturally(block.getLocation(), BlockStorage.check(block).getItem());
                             BlockStorage.clearBlockInfo(block);
@@ -87,7 +102,6 @@ public abstract class AbstractBarrel extends SlimefunItem {
                 return false;
             }
         });
-
     }
 
     public int[] getInputSlots() {
@@ -175,7 +189,6 @@ public abstract class AbstractBarrel extends SlimefunItem {
                     }
 
                 }
-
             }
         }
 
