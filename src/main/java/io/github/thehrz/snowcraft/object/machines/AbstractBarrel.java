@@ -170,23 +170,22 @@ public abstract class AbstractBarrel extends SlimefunItem {
 
         for (int slot : getInputSlots()) {
             if (BlockStorage.getInventory(block).getItemInSlot(slot) != null) {
-                ItemStack itemStack = BlockStorage.getInventory(block).getItemInSlot(slot).clone();
-                ItemStack singleItemStack = new ItemBuilder(itemStack.clone()).amount(1).build();
+                ItemStack singleItemStack = new ItemBuilder(BlockStorage.getInventory(block).getItemInSlot(slot).clone()).amount(1).build();
 
                 if (BlockStorage.getLocationInfo(block.getLocation(), "item-type") == null) {
-                    material = itemStack;
+                    material = singleItemStack.clone();
                     BlockStorage.addBlockInfo(block, "item-type", Items.toJson(singleItemStack));
                 }
 
                 if (singleItemStack.equals(Items.fromJson(BlockStorage.getLocationInfo(block.getLocation(), "item-type")))) {
-                    if (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + itemStack.getAmount() > getBarrelCapacity()) {
-                        BlockStorage.getInventory(block).getItemInSlot(slot).setAmount(itemStack.getAmount() - (getBarrelCapacity() - Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount"))));
+                    if (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + BlockStorage.getInventory(block).getItemInSlot(slot).clone().getAmount() > getBarrelCapacity()) {
+                        BlockStorage.getInventory(block).getItemInSlot(slot).setAmount(BlockStorage.getInventory(block).getItemInSlot(slot).clone().getAmount() - (getBarrelCapacity() - Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount"))));
                         BlockStorage.addBlockInfo(block, "amount", String.valueOf(getBarrelCapacity()));
-                    } else if (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + itemStack.getAmount() <= getBarrelCapacity()) {
-                        BlockStorage.getInventory(block).replaceExistingItem(slot, null);
-                        BlockStorage.addBlockInfo(block, "amount", (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + itemStack.getAmount() == getBarrelCapacity()) ?
+                    } else if (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + BlockStorage.getInventory(block).getItemInSlot(slot).clone().getAmount() <= getBarrelCapacity()) {
+                        BlockStorage.addBlockInfo(block, "amount", (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + BlockStorage.getInventory(block).getItemInSlot(slot).clone().getAmount() == getBarrelCapacity()) ?
                                 String.valueOf(getBarrelCapacity()) :
-                                String.valueOf(Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + itemStack.getAmount()));
+                                String.valueOf(Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) + BlockStorage.getInventory(block).getItemInSlot(slot).clone().getAmount()));
+                        BlockStorage.getInventory(block).replaceExistingItem(slot, null);
                     }
                 }
             }
