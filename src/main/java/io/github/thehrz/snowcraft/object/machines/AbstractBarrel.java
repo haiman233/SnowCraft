@@ -173,7 +173,6 @@ public abstract class AbstractBarrel extends SlimefunItem {
                 ItemStack singleItemStack = new ItemBuilder(BlockStorage.getInventory(block).getItemInSlot(slot).clone()).amount(1).build();
 
                 if (BlockStorage.getLocationInfo(block.getLocation(), "item-type") == null) {
-                    material = singleItemStack.clone();
                     BlockStorage.addBlockInfo(block, "item-type", Items.toJson(singleItemStack));
                 }
 
@@ -204,13 +203,16 @@ public abstract class AbstractBarrel extends SlimefunItem {
                         BlockStorage.getInventory(block).replaceExistingItem(slot, new ItemBuilder(material.clone()).amount(barrelItemAmount).build());
                         BlockStorage.addBlockInfo(block, "amount", String.valueOf(0));
                     }
-                } else if (new ItemBuilder(BlockStorage.getInventory(block).getItemInSlot(slot).clone()).amount(1).build().equals(material) &&
-                        BlockStorage.getInventory(block).getItemInSlot(slot).getAmount() != BlockStorage.getInventory(block).getItemInSlot(slot).getMaxStackSize()) {
-                    ItemStack itemStack = BlockStorage.getInventory(block).getItemInSlot(slot);
-                    int amount = material.getMaxStackSize() - itemStack.getAmount();
+                } else if (new ItemBuilder(BlockStorage.getInventory(block).getItemInSlot(slot).clone()).amount(1).build().equals(material)) {
+                    int amount = material.getMaxStackSize() - BlockStorage.getInventory(block).getItemInSlot(slot).getAmount();
 
-                    BlockStorage.getInventory(block).replaceExistingItem(slot, new ItemBuilder(material.clone()).amount(material.getMaxStackSize()).build());
-                    BlockStorage.addBlockInfo(block, "amount", String.valueOf(barrelItemAmount - amount));
+                    if (Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount")) >= amount) {
+                        BlockStorage.getInventory(block).replaceExistingItem(slot, new ItemBuilder(material.clone()).amount(material.getMaxStackSize()).build());
+                        BlockStorage.addBlockInfo(block, "amount", String.valueOf(barrelItemAmount - amount));
+                    } else {
+                        BlockStorage.getInventory(block).replaceExistingItem(slot, new ItemBuilder(material.clone()).amount(BlockStorage.getInventory(block).getItemInSlot(slot).getAmount() + Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), "amount"))).build());
+                        BlockStorage.addBlockInfo(block, "amount", String.valueOf(0));
+                    }
                 }
             }
         }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.github.thehrz.snowcraft'
-version = 1.51
+version = 1.52
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
