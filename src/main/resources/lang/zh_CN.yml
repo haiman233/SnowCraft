@@ -1,0 +1,25 @@
+config-reload: "&8[&3SnowCraft&8] &a配置文件加载成功"
+block-compres-machine: "&a方块压缩机"
+abstract-tree-growth-accelerator: "&b树木生长加速器"
+abstract-tree-growth-dispenser: "&a树木肥料发射器"
+android-panel: "&b机器人面板"
+android-panel-menu-owner: "§a主人 §b{0}"
+android-panel-menu-owner-lore:
+  - ""
+  - "§a点击以更改主人"
+  - ""
+ice-cream-eating:
+  - type: ACTIONBAR
+    text: "&a你食用了冰淇淋 获得了冰淇淋给予你的跳跃加成"
+snow-golem-stick-10damage:
+  - type: ACTIONBAR
+    text: "§a你击飞了{0}，并对它造成了10点伤害"
+snow-golem-stick-strike-lightning:
+  - type: ACTIONBAR
+    text: "§a你为{0}召唤了一道闪电"
+snow-golem-stick-strike-lightning-effect:
+  - type: ACTIONBAR
+    text: "§a你为{0}召唤了一道没有伤害的闪电"
+snow-golem-stick-20damger:
+  - type: ACTIONBAR
+    text: "§a你对{0}造成了20点伤害"
